@@ -1,14 +1,5 @@
-import type { ReactNode } from 'react';
-import type { LucideIcon } from '../icons';
+import type { EmptyStateProps } from '../../types/ui.types';
 import { cn } from '../../utils/cn';
-
-interface EmptyStateProps {
-    icon: LucideIcon;
-    title: string;
-    description: string;
-    action?: ReactNode;
-    className?: string;
-}
 
 export const EmptyState = ({ icon: Icon, title, description, action, className }: EmptyStateProps) => {
     return (

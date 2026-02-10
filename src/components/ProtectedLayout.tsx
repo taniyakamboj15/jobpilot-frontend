@@ -1,6 +1,7 @@
 import { Suspense, useState, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { APP_ROUTES } from '../constants';
 import { Sidebar, Navbar } from './Navigation';
 import { PageLoader } from '../app/router';
 
@@ -11,7 +12,7 @@ const ProtectedLayout = () => {
 
     useEffect(() => {
         if (!isLoading && !isAuthenticated) {
-            navigate('/login');
+            navigate(APP_ROUTES.LOGIN);
         }
     }, [isAuthenticated, isLoading, navigate]);
 

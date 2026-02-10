@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { interviewService } from '../services/interview.service';
-import type { CreateInterviewData, Interview } from '../services/interview.service';
+import type { CreateInterviewData, Interview } from '../types/interview.types';
 
 export const useInterviews = () => {
     const query = useQuery({

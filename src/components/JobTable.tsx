@@ -1,21 +1,7 @@
 import { ExternalLink, Pencil, Trash2 } from './icons';
 import { formatDate } from '../utils/format';
 import { StatusBadge } from './ui/StatusBadge';
-
-interface Job {
-    _id: string;
-    company: string;
-    role: string;
-    status: string;
-    dateApplied: string;
-    jobLink?: string;
-}
-
-interface JobTableProps {
-    jobs: Job[];
-    onEdit: (job: Job) => void;
-    onDelete: (id: string) => void;
-}
+import type { JobTableProps } from '../types/job.types';
 
 export const JobTable = ({ jobs, onEdit, onDelete }: JobTableProps) => {
     return (

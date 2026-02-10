@@ -9,10 +9,13 @@ import { Button, Input } from '../components/FormElements';
 import { Select } from '../components/ui/Select';
 import { Textarea } from '../components/ui/Textarea';
 import { ArrowLeft } from '../components/icons';
+import { INTERVIEW_TYPE_OPTIONS, INTERVIEW_TYPE_MAP } from '../constants';
 
-import { interviewSchema, type ScheduleInterviewFormData } from '../schemas/interview.schema';
+import { interviewSchema } from '../schemas/interview.schema';
+import type { ScheduleInterviewFormData } from '../types/interview.types';
 import { getJobDetails, getFormTitle, getFormDescription } from '../utils/helpers';
 import type { Job } from '../types/job.types';
+import { APP_ROUTES } from '../constants';
 
 const ScheduleInterviewPage = () => {
     const navigate = useNavigate();
@@ -72,19 +75,11 @@ const ScheduleInterviewPage = () => {
 
             notes = notes.trim();
 
-            const typeMap: Record<string, string> = {
-                'TECHNICAL': 'Technical',
-                'HR': 'HR',
-                'MANAGERIAL': 'Managerial',
-                'FINAL': 'Final',
-                'OTHER': 'Other'
-            };
-
             const { id: jobId } = getJobDetails(data.jobId);
 
             reset({
                 jobId: jobId,
-                interviewType: typeMap[data.interviewType] || 'Other',
+                interviewType: INTERVIEW_TYPE_MAP[data.interviewType] || 'Other',
                 date: dateStr,
                 time: timeStr,
                 interviewerName,
@@ -113,7 +108,7 @@ const ScheduleInterviewPage = () => {
             } else {
                 await createInterview(payload);
             }
-            navigate('/interviews');
+            navigate(APP_ROUTES.INTERVIEWS.LIST);
         } catch (error) {
             console.error("Failed to save interview", error);
         }
@@ -130,7 +125,7 @@ const ScheduleInterviewPage = () => {
     return (
         <div className="max-w-2xl mx-auto">
             <div className="mb-6">
-                <Link to="/interviews" className="flex items-center text-gray-500 hover:text-gray-700 mb-4">
+                <Link to={APP_ROUTES.INTERVIEWS.LIST} className="flex items-center text-gray-500 hover:text-gray-700 mb-4">
                     <ArrowLeft className="h-4 w-4 mr-1" />
                     Back to Interviews
                 </Link>
@@ -161,11 +156,11 @@ const ScheduleInterviewPage = () => {
                             {...register('interviewType')}
                         >
                             <option value="">Select type...</option>
-                            <option value="Technical">Technical</option>
-                            <option value="HR">HR</option>
-                            <option value="Managerial">Managerial</option>
-                            <option value="Final">Final</option>
-                            <option value="Other">Other</option>
+                            {INTERVIEW_TYPE_OPTIONS.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
                         </Select>
 
                         <Input

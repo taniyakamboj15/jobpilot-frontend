@@ -1,13 +1,4 @@
-interface CompanyPerformance {
-    _id: string;
-    totalApplications: number;
-    interviews: number;
-    offers: number;
-}
-
-interface CompanyTableProps {
-    data: CompanyPerformance[];
-}
+import type { CompanyTableProps } from '../../types/analytics.types';
 
 export const CompanyTable = ({ data }: CompanyTableProps) => {
     return (

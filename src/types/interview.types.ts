@@ -22,3 +22,23 @@ export interface CreateInterviewData {
     interviewDate: string; // ISO Date string
     notes?: string;
 }
+export interface InterviewCardProps {
+    interview: Interview;
+    onEdit?: (interview: Interview) => void;
+    onDelete?: (id: string) => void;
+}
+
+export interface CalendarViewProps {
+    interviews: Interview[];
+    onDateSelect?: (date: Date) => void;
+}
+
+export interface ScheduleInterviewFormData {
+    jobId: string;
+    interviewType: string;
+    date: string;
+    time: string;
+    interviewerName: string;
+    meetingLink: string;
+    notes: string;
+}

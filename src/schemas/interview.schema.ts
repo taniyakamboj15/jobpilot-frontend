@@ -9,5 +9,3 @@ export const interviewSchema = yup.object().shape({
     meetingLink: yup.string().url('Must be a valid URL').optional().default(''),
     notes: yup.string().optional().default(''),
 });
-
-export type ScheduleInterviewFormData = yup.InferType<typeof interviewSchema>;

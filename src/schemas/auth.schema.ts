@@ -13,6 +13,3 @@ export const registerSchema = yup.object().shape({
         .oneOf([yup.ref('password')], 'Passwords must match')
         .required('Confirm password is required'),
 });
-
-export type LoginFormData = yup.InferType<typeof loginSchema>;
-export type RegisterFormData = yup.InferType<typeof registerSchema>;

@@ -5,11 +5,7 @@ import { formatDate } from '../utils/format';
 import { getJobDetails } from '../utils/helpers';
 import { Button } from './FormElements';
 import { StatusBadge } from './ui/StatusBadge';
-import type { Interview } from '../types/interview.types';
-
-interface InterviewCardProps {
-    interview: Interview;
-}
+import type { InterviewCardProps } from '../types/interview.types';
 
 export const InterviewCard = React.memo(({ interview }: InterviewCardProps) => {
     const { company, role } = getJobDetails(interview.jobId);

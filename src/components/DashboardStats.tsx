@@ -1,5 +1,5 @@
 import React from 'react';
-import type { LucideIcon } from './icons';
+import type { StatCardProps, ChartProps } from '../types/dashboard.types';
 import {
     ResponsiveContainer,
     AreaChart,
@@ -11,66 +11,6 @@ import {
 } from 'recharts';
 
 import { theme } from '../styles/theme';
-
-interface StatCardProps {
-    title: string;
-    value: string | number;
-    icon?: LucideIcon;
-    trend?: {
-        value: number;
-        isPositive: boolean;
-    };
-    subtext?: string;
-    className?: string;
-}
-
-export const StatCard = React.memo(({ title, value, icon: Icon, trend, subtext, className }: StatCardProps) => {
-    return (
-        <div className={`bg-white rounded-xl border border-gray-100 p-6 shadow-sm ${className}`}>
-            <div className="flex items-center justify-between">
-                <div>
-                    <p className="text-sm font-medium text-gray-500">{title}</p>
-                    <div className="mt-2 flex items-end">
-                        <span className="text-3xl font-bold text-gray-900">{value}</span>
-                        {subtext && <span className="ml-2 text-sm text-gray-500 mb-1">{subtext}</span>}
-                    </div>
-                </div>
-                {Icon && (
-                    <div className="bg-primary-50 p-2.5 rounded-lg">
-                        <Icon className="h-6 w-6 text-primary-600" />
-                    </div>
-                )}
-            </div>
-            <TrendIndicator trend={trend} />
-        </div>
-    );
-});
-
-const TrendIndicator = ({ trend }: { trend?: { value: number; isPositive: boolean } }) => {
-    if (!trend) return null;
-
-    return (
-        <div className="mt-4 flex items-center text-sm">
-            <span className={trend.isPositive ? 'text-green-600' : 'text-red-600'}>
-                {trend.isPositive ? '+' : '-'}{trend.value}%
-            </span>
-            <span className="ml-1.5 text-gray-500">vs last month</span>
-        </div>
-    );
-};
-
-interface ChartDataPoint {
-    name: string;
-    count: number;
-    [key: string]: any; // Allow for other props if needed by Recharts
-}
-
-interface ChartProps {
-    data: ChartDataPoint[];
-    title?: string;
-    height?: number;
-    color?: string;
-}
 
 export const ApplicationChart = ({ data, title = "Applications Overview", height = 350, color = theme.colors.primary[500] }: ChartProps) => {
     return (
@@ -115,6 +55,41 @@ export const ApplicationChart = ({ data, title = "Applications Overview", height
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
+        </div>
+    );
+};
+
+export const StatCard = React.memo(({ title, value, icon: Icon, trend, subtext, className }: StatCardProps) => {
+    return (
+        <div className={`bg-white rounded-xl border border-gray-100 p-6 shadow-sm ${className}`}>
+            <div className="flex items-center justify-between">
+                <div>
+                    <p className="text-sm font-medium text-gray-500">{title}</p>
+                    <div className="mt-2 flex items-end">
+                        <span className="text-3xl font-bold text-gray-900">{value}</span>
+                        {subtext && <span className="ml-2 text-sm text-gray-500 mb-1">{subtext}</span>}
+                    </div>
+                </div>
+                {Icon && (
+                    <div className="bg-primary-50 p-2.5 rounded-lg">
+                        <Icon className="h-6 w-6 text-primary-600" />
+                    </div>
+                )}
+            </div>
+            <TrendIndicator trend={trend} />
+        </div>
+    );
+});
+
+const TrendIndicator = ({ trend }: { trend?: { value: number; isPositive: boolean } }) => {
+    if (!trend) return null;
+
+    return (
+        <div className="mt-4 flex items-center text-sm">
+            <span className={trend.isPositive ? 'text-green-600' : 'text-red-600'}>
+                {trend.isPositive ? '+' : '-'}{trend.value}%
+            </span>
+            <span className="ml-1.5 text-gray-500">vs last month</span>
         </div>
     );
 };

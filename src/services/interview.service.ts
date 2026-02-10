@@ -1,51 +1,27 @@
 import api from './api';
+import type { Interview, CreateInterviewData } from '../types/interview.types';
+import { API_ENDPOINTS } from '../constants';
 
-export interface Interview {
-    _id: string;
-    jobId: {
-        _id: string;
-        company: string;
-        role: string;
-    } | string; // Populated or ID
-    companyName?: string; // Derived from populated jobId
-    jobRole?: string;    // Derived from populated jobId
-    interviewType: 'Technical' | 'HR' | 'Managerial' | 'Final' | 'Other';
-    interviewDate: string;
-    // time is part of interviewDate
-    interviewerName?: string; // Not in backend yet, but kept for future? Or remove.
-    meetingLink?: string;     // Not in backend yet
-    notes?: string;
-    status: 'Scheduled' | 'Completed' | 'Cancelled';
-}
-
-export interface CreateInterviewData {
-    jobId: string;
-    interviewType: string;
-    interviewDate: string; // ISO Date string
-    notes?: string;
-    // Frontend-only fields if needed, but for payload these are not part of request body usually
-    // but the service function takes this type. So we should use a separate type or loosen this.
-    // For now, let's match the backend payload.
-}
+export type { Interview, CreateInterviewData };
 
 export const interviewService = {
     getAllInterviews: async () => {
-        return await api.get('/interviews');
+        return await api.get(API_ENDPOINTS.INTERVIEWS.BASE);
     },
 
     getInterviewById: async (id: string) => {
-        return await api.get(`/interviews/${id}`);
+        return await api.get(API_ENDPOINTS.INTERVIEWS.BY_ID(id));
     },
 
     createInterview: async (data: CreateInterviewData) => {
-        return await api.post('/interviews', data);
+        return await api.post(API_ENDPOINTS.INTERVIEWS.BASE, data);
     },
 
     updateInterview: async (id: string, data: Partial<CreateInterviewData>) => {
-        return await api.put(`/interviews/${id}`, data);
+        return await api.put(API_ENDPOINTS.INTERVIEWS.BY_ID(id), data);
     },
 
     deleteInterview: async (id: string) => {
-        return await api.delete(`/interviews/${id}`);
+        return await api.delete(API_ENDPOINTS.INTERVIEWS.BY_ID(id));
     }
 };

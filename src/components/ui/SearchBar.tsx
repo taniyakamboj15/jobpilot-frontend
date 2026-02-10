@@ -1,10 +1,6 @@
 import { Search } from '../icons';
-import type { InputHTMLAttributes } from 'react';
+import type { SearchBarProps } from '../../types/ui.types';
 import { cn } from '../../utils/cn';
-
-interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
-    containerClassName?: string;
-}
 
 export const SearchBar = ({ className, containerClassName, ...props }: SearchBarProps) => {
     return (

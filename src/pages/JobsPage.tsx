@@ -8,6 +8,7 @@ import { Button } from '../components/FormElements';
 import { PageHeader } from '../components/ui/PageHeader';
 import { SearchBar } from '../components/ui/SearchBar';
 import { LoadingSkeleton } from '../components/ui/LoadingSkeleton';
+import { APP_ROUTES } from '../constants';
 
 const JobsPage = () => {
     const [search, setSearch] = useState('');
@@ -32,7 +33,7 @@ const JobsPage = () => {
                 title="Job Applications"
                 description="View and manage all your active job pursuits."
             >
-                <Button onClick={() => navigate('/jobs/add')} className="flex items-center">
+                <Button onClick={() => navigate(APP_ROUTES.JOBS.ADD)} className="flex items-center">
                     <Plus className="mr-2 h-4 w-4" />
                     New Application
                 </Button>
@@ -52,7 +53,7 @@ const JobsPage = () => {
             ) : (
                 <JobTable
                     jobs={jobs}
-                    onEdit={(job) => navigate(`/jobs/edit/${job._id}`, { state: { job } })}
+                    onEdit={(job) => navigate(APP_ROUTES.JOBS.EDIT(job._id), { state: { job } })}
                     onDelete={handleDelete}
                 />
             )}

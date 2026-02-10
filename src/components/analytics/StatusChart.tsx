@@ -8,16 +8,12 @@ import {
     Cell
 } from 'recharts';
 
+import type { StatusChartProps } from '../../types/analytics.types';
 import { theme } from '../../styles/theme';
 
-interface StatusChartProps {
-    data: { name: string; value: number }[];
-    colors?: readonly string[];
-}
+import { CHART_COLORS } from '../../constants';
 
-const DEFAULT_COLORS = theme.colors.charts.palette;
-
-export const StatusChart = ({ data, colors = DEFAULT_COLORS }: StatusChartProps) => {
+export const StatusChart = ({ data, colors = CHART_COLORS }: StatusChartProps) => {
     return (
         <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm h-[400px]">
             <h3 className="text-lg font-bold text-gray-900 mb-6">Application Status</h3>

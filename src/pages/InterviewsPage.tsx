@@ -8,6 +8,7 @@ import CalendarView from '../components/CalendarView';
 import { PageHeader } from '../components/ui/PageHeader';
 import { EmptyState } from '../components/ui/EmptyState';
 import { InterviewCard } from '../components/InterviewCard';
+import { APP_ROUTES } from '../constants';
 
 const InterviewsPage = () => {
     const { interviews, isLoading } = useInterviews();
@@ -45,7 +46,7 @@ const InterviewsPage = () => {
                         <CalendarIcon className="w-4 h-4" />
                     </button>
                 </div>
-                <Link to="/interviews/schedule">
+                <Link to={APP_ROUTES.INTERVIEWS.SCHEDULE}>
                     <Button className="flex items-center">
                         <Plus className="mr-2 h-4 w-4" />
                         Schedule Interview
@@ -59,7 +60,7 @@ const InterviewsPage = () => {
                     title="No interviews scheduled yet."
                     description="Once you get an interview call, schedule it here to keep track of dates, times, and preparation notes."
                     action={
-                        <Link to="/interviews/schedule">
+                        <Link to={APP_ROUTES.INTERVIEWS.SCHEDULE}>
                             <Button variant="outline">Schedule your first interview</Button>
                         </Link>
                     }

@@ -2,6 +2,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useJobMutations } from '../hooks/useJobs';
 import { JobForm } from '../components/JobForm';
 import type { JobFormData } from '../schemas/job.schema';
+import { APP_ROUTES } from '../constants';
 
 const EditJobPage = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const EditJobPage = () => {
         if (!id) return;
         try {
             await updateJob({ id, data });
-            navigate('/jobs');
+            navigate(APP_ROUTES.JOBS.LIST);
         } catch (error) {
             console.error("Failed to update job", error);
         }
@@ -40,7 +41,7 @@ const EditJobPage = () => {
                     initialData={initialJob}
                     onSubmit={handleSubmit}
                     loading={isUpdating}
-                    onCancel={() => navigate('/jobs')}
+                    onCancel={() => navigate(APP_ROUTES.JOBS.LIST)}
                 />
             </div>
         </div>

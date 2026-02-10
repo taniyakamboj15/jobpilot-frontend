@@ -1,10 +1,6 @@
 import React from 'react';
+import type { TextareaProps } from '../../types/ui.types';
 import { cn } from '../../utils/cn';
-
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-    label?: string;
-    error?: string;
-}
 
 export const Textarea = React.memo(React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     ({ label, error, className, ...props }, ref) => {

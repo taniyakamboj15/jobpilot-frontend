@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+import type { SelectProps } from '../../types/ui.types';
 import { cn } from '../../utils/cn';
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-    label?: string;
-    error?: string;
-}
-
-export const Select = React.memo(React.forwardRef<HTMLSelectElement, SelectProps>(
+export const Select = React.memo(forwardRef<HTMLSelectElement, SelectProps>(
     ({ label, error, className, children, ...props }, ref) => {
         return (
             <div className="w-full space-y-1.5">

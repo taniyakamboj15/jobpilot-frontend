@@ -8,7 +8,9 @@ import { authService } from '../services/auth.service';
 import { Input, Button } from '../components/FormElements';
 import { AuthLayout } from '../components/layout/AuthLayout';
 
-import { registerSchema, type RegisterFormData } from '../schemas/auth.schema';
+import { registerSchema } from '../schemas/auth.schema';
+import type { RegisterFormData } from '../types/auth.types';
+import { APP_ROUTES } from '../constants';
 
 const RegisterPage = () => {
     const { login } = useAuth();
@@ -27,7 +29,7 @@ const RegisterPage = () => {
             const { name, email, password } = data;
             const response = await authService.register({ name, email, password });
             login(response.data.user);
-            navigate('/dashboard');
+            navigate(APP_ROUTES.DASHBOARD);
         } catch (err: unknown) {
             const errorMessage = err instanceof Error ? err.message : 'Registration failed. Please try again.';
             setError(errorMessage);
@@ -84,7 +86,7 @@ const RegisterPage = () => {
 
             <p className="text-center text-sm text-gray-600">
                 Already have an account?{' '}
-                <Link to="/login" className="font-medium text-primary-600 hover:text-primary-500">
+                <Link to={APP_ROUTES.LOGIN} className="font-medium text-primary-600 hover:text-primary-500">
                     Sign in
                 </Link>
             </p>

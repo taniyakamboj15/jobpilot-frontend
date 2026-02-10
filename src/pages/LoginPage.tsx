@@ -8,7 +8,9 @@ import { authService } from '../services/auth.service';
 import { Input, Button } from '../components/FormElements';
 import { AuthLayout } from '../components/layout/AuthLayout';
 
-import { loginSchema, type LoginFormData } from '../schemas/auth.schema';
+import { loginSchema } from '../schemas/auth.schema';
+import type { LoginFormData } from '../types/auth.types';
+import { APP_ROUTES } from '../constants';
 
 const LoginPage = () => {
     const { login } = useAuth();
@@ -26,7 +28,7 @@ const LoginPage = () => {
         try {
             const response = await authService.login(data);
             login(response.data.user);
-            navigate('/dashboard');
+            navigate(APP_ROUTES.DASHBOARD);
         } catch (err: unknown) {
             const errorMessage = err instanceof Error ? err.message : 'Login failed. Please check your credentials.';
             setError(errorMessage);

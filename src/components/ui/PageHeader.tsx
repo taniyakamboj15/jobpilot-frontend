@@ -1,12 +1,7 @@
-import React, { type ReactNode } from 'react';
+import React from 'react';
 import { cn } from '../../utils/cn';
 
-interface PageHeaderProps {
-    title: string;
-    description?: string;
-    children?: ReactNode; // For action buttons or other controls
-    className?: string;
-}
+import type { PageHeaderProps } from '../../types/ui.types';
 
 export const PageHeader = React.memo(({ title, description, children, className }: PageHeaderProps) => {
     return (

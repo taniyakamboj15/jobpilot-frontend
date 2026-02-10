@@ -12,7 +12,7 @@ export {
     LayoutDashboard,
     Briefcase,
     Calendar,
-    BarChart3,
+    ChartBarBig as BarChart3,
     LogOut,
     Menu,
     X,
@@ -28,8 +28,8 @@ export {
 
     // Status & Time
     Clock,
-    CheckCircle2,
-    XCircle,
+    CircleCheck as CheckCircle2,
+    CircleX as XCircle,
     ChevronLeft,
     ChevronRight,
 

@@ -1,10 +1,6 @@
 import { cn } from '../../utils/cn';
 
-interface LoadingSkeletonProps {
-    count?: number;
-    height?: string;
-    className?: string;
-}
+import type { LoadingSkeletonProps } from '../../types/ui.types';
 
 export const LoadingSkeleton = ({ count = 3, height = "h-16", className }: LoadingSkeletonProps) => {
     return (

@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import type { JobFormProps } from '../types/job.types';
 
 import { Input, Button } from './FormElements';
 import { Select } from './ui/Select';
@@ -9,14 +10,8 @@ import { Textarea } from './ui/Textarea';
 import { jobSchemaTyped } from '../schemas/job.schema';
 import { formatDateInput } from '../utils/helpers';
 
-import type { JobFormData } from '../schemas/job.schema';
-
-interface JobFormProps {
-    initialData?: JobFormData & { dateApplied?: string }; // Handle date string from backend
-    onSubmit: SubmitHandler<JobFormData>;
-    loading: boolean;
-    onCancel: () => void;
-}
+import type { JobFormData } from '../types/job.types';
+import { JOB_STATUS_OPTIONS } from '../constants';
 
 export const JobForm = ({ initialData, onSubmit, loading, onCancel }: JobFormProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<JobFormData>({
@@ -54,10 +49,11 @@ export const JobForm = ({ initialData, onSubmit, loading, onCancel }: JobFormPro
                     error={errors.status?.message?.toString()}
                     {...register('status')}
                 >
-                    <option value="APPLIED">Applied</option>
-                    <option value="INTERVIEW">Interview</option>
-                    <option value="OFFER">Offer</option>
-                    <option value="REJECTED">Rejected</option>
+                    {JOB_STATUS_OPTIONS.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
                 </Select>
                 <Input
                     label="Date Applied"

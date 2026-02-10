@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useJobMutations } from '../hooks/useJobs';
 import { JobForm } from '../components/JobForm';
 import type { JobFormData } from '../schemas/job.schema';
+import { APP_ROUTES } from '../constants';
 
 const AddJobPage = () => {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ const AddJobPage = () => {
     const handleSubmit = async (data: JobFormData) => {
         try {
             await createJob(data);
-            navigate('/jobs');
+            navigate(APP_ROUTES.JOBS.LIST);
         } catch (error) {
             console.error("Failed to add job", error);
         }
@@ -27,7 +28,7 @@ const AddJobPage = () => {
                 <JobForm
                     onSubmit={handleSubmit}
                     loading={isCreating}
-                    onCancel={() => navigate('/jobs')}
+                    onCancel={() => navigate(APP_ROUTES.JOBS.LIST)}
                 />
             </div>
         </div>

@@ -1,11 +1,7 @@
 import React from 'react';
 import { cn } from '../utils/cn';
 import { Spinner } from './icons';
-
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label?: string;
-    error?: string;
-}
+import type { InputProps, ButtonProps } from '../types/ui.types';
 
 export const Input = React.memo(React.forwardRef<HTMLInputElement, InputProps>(
     ({ label, error, className, ...props }, ref) => {
@@ -31,10 +27,7 @@ export const Input = React.memo(React.forwardRef<HTMLInputElement, InputProps>(
     }
 ));
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-    isLoading?: boolean;
-}
+import { BUTTON_VARIANTS } from '../constants';
 
 export const Button = React.memo(({
     variant = 'primary',
@@ -43,18 +36,11 @@ export const Button = React.memo(({
     children,
     ...props
 }: ButtonProps) => {
-    const variants = {
-        primary: 'bg-primary-600 text-white hover:bg-primary-700',
-        secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
-        outline: 'border border-gray-300 bg-transparent hover:bg-gray-100',
-        ghost: 'hover:bg-gray-100 text-gray-700',
-    };
-
     return (
         <button
             className={cn(
                 "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-                variants[variant],
+                BUTTON_VARIANTS[variant],
                 className
             )}
             disabled={isLoading}

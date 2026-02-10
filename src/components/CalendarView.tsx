@@ -1,14 +1,10 @@
 import { useState, useMemo } from 'react';
+import type { CalendarViewProps } from '../types/interview.types';
 import { ChevronLeft, ChevronRight } from './icons';
 import { Link } from 'react-router-dom';
 import { cn } from '../utils/cn';
 import { getJobDetails } from '../utils/helpers';
-
-import type { Interview } from '../types/interview.types';
-
-interface CalendarViewProps {
-    interviews: Interview[];
-}
+import { MONTH_NAMES, WEEKDAYS } from '../constants';
 
 const CalendarView = ({ interviews }: CalendarViewProps) => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -17,11 +13,6 @@ const CalendarView = ({ interviews }: CalendarViewProps) => {
     const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
     const daysInMonth = lastDayOfMonth.getDate();
     const startingDayOfWeek = firstDayOfMonth.getDay(); // 0 is Sunday
-
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
 
     const prevMonth = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -75,7 +66,7 @@ const CalendarView = ({ interviews }: CalendarViewProps) => {
             <div className="flex items-center justify-between p-4 border-b border-gray-100">
                 <div className="flex items-center space-x-4">
                     <h2 className="text-lg font-bold text-gray-900">
-                        {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+                        {MONTH_NAMES[currentDate.getMonth()]} {currentDate.getFullYear()}
                     </h2>
                     <div className="flex space-x-1">
                         <button onClick={prevMonth} className="p-1 rounded-full hover:bg-gray-100 text-gray-500">
@@ -96,7 +87,7 @@ const CalendarView = ({ interviews }: CalendarViewProps) => {
 
             {/* Weekdays Header */}
             <div className="grid grid-cols-7 bg-gray-50 border-b border-gray-100">
-                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+                {WEEKDAYS.map((day) => (
                     <div key={day} className="py-2 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
                         {day}
                     </div>

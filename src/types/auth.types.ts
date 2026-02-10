@@ -22,11 +22,14 @@ export interface LoginCredentials {
     password: string;
 }
 
-export interface RegisterData {
+export interface RegisterData extends LoginCredentials {
     name: string;
-    email: string;
-    password: string;
 }
+
+export type LoginFormData = LoginCredentials;
+export type RegisterFormData = RegisterData & {
+    confirmPassword: string;
+};
 
 export interface ResetPasswordData {
     token: string;
